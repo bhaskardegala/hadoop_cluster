@@ -8,8 +8,9 @@
         msg: " installing hadoop "
     - name: " updating packages "
       apt:
-        name: update
         update_cache: yes
+    - name: " updating packages "
+      apt:
         upgrade: dist
     - name: " installing java 8 "
       apt:
