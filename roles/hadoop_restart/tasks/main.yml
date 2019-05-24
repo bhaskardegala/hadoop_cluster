@@ -1,0 +1,13 @@
+---
+# tasks file for gameoflife
+    - fail: 
+        msg: "this playbook is only designed "
+      when: 
+      - ansible_os_family != "Debian"
+    - name: " format hdfs "
+      command:
+      argv:
+        - hdfs namenode -format
+        - /opt/hadoop/etc/hadoop/sbin/start-dfs.sh
+        - /opt/hadoop/etc/hadoop/sbin/start-yarn.sh
+        - /opt/hadoop/etc/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver

@@ -1,0 +1,13 @@
+<configuration>
+
+<!— Site specific YARN configuration properties -->
+
+  <property>
+    <name>yarn.nodemanager.aux-services</name>
+    <value>mapreduce_shuffle</value>
+  </property>
+  <property>
+    <name>yarn.resourcemanager.hostname</name>
+    <value>{{ansible_default_ipv4.address}}</value>
+  </property>
+</configuration>

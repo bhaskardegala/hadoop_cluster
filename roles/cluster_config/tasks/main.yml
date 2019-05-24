@@ -1,0 +1,49 @@
+---
+# tasks file for gameoflife
+    - fail: 
+        msg: "this playbook is only designed "
+      when: 
+      - ansible_os_family != "Debian"
+    - debug:
+        msg: " installing hadoop "
+    - name: " updating packages "
+      apt:
+        name: update
+        update_cache: yes
+        upgrade: dist
+    - name: " installing java 8 "
+      apt:
+        name: openjdk-8-jdk
+        state: present
+    - name: " installing wget "
+      apt:
+        name: wget
+        state: present
+    - name: " downloading hadoop "
+      get_url:
+        url: http://apache.mirrors.tds.net/hadoop/common/{{ package_hadoop }}/{{ package_hadoop }}.tar.gz
+        dest: /opt/{{ package_hadoop }}.tar.gz
+    - name: " unzipping "
+      unarchive:
+        src: /opt/{{ package_hadoop }}.tar.gz
+        dest: /opt/
+        remote_src: yes
+    - name: " changing directory name "
+      command: mv /opt/{{ package_hadoop }} /opt/hadoop
+    - name: " adding evironment variables "
+      copy:
+        src: /copy/.bashrc
+        dest: /.bashrc
+    - name: " configuring core-site.xml "
+      template:
+        src: /config_cluster/core-site.xml.j2
+        dest: /opt/hadoop/etc/hadoop/core-site.xml
+    - name: " configuring yarn-site.xml "
+      template:
+        src: /config_cluster/yarn-site.xml.j2
+        dest: /opt/hadoop/etc/hadoop/yarn-site.xml
+    - name: " configuring mapred-site.xml "
+      template:
+        src: /config_cluster/mapred-site.xml.j2
+        dest: /opt/hadoop/etc/hadoop/mapred-site.xml
+    

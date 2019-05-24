@@ -1,0 +1,29 @@
+---
+# tasks file for gameoflife
+    - fail: 
+        msg: "this playbook is only designed "
+      when: 
+      - ansible_os_family != "Debian"
+    - name: " editing hosts "
+      template:
+        src: /config_namenode/hosts.j2
+        dest: /etc/hosts
+    - name: " configuring hdfs-site.xml"
+      template:
+        src: /config_namenode/hdfs-site.xml.j2
+        dest: /opt/hadoop/etc/hadoop/hdfs-site.xml
+    - name: " creating namenode directory "
+      file:
+        path: /opt/hadoop/etc/hadoop//data/hdfs/namenode
+        state: directory
+    - name: " creating masters file "
+      template:
+        src: /config_namenode/masters
+        dest: /opt/hadoop/etc/hadoop/masters
+    - name: " deleting slaves file "
+      file :
+        path: /opt/hadoop/etc/hadoop/slaves
+        state: absent
+    - template: " adding slaves file "
+        src: /config_namenode/slaves.j2
+        dest: /opt/hadoop/etc/hadoop/slaves

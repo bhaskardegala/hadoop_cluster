@@ -1,0 +1,10 @@
+---
+# tasks file for gameoflife
+    - fail: 
+        msg: "this playbook is only designed "
+      when: 
+      - ansible_os_family != "Debian"
+    - name: " configure hdfs-site.xml "
+      template:
+        src: /config_datanode/hdfs-site.xml.j2
+        dest: /opt/hadoop/etc/hadoop/hdfs-site.xml
