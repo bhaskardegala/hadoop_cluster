@@ -1,4 +1,4 @@
 ---
 # vars file for gameoflife
 
-package_hadoop: hadoop-2.8.1
+package_hadoop: hadoop-3.1.2
