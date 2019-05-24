@@ -30,23 +30,26 @@
         dest: /opt/
         remote_src: yes
     - name: " changing directory name "
-      command: mv /opt/{{ package_hadoop }} /opt/hadoop
+      copy:
+        src: /opt/{{ package_hadoop }}
+        dest: /opt/hadoop
+        remote_src: yes
     - name: " adding evironment variables "
       copy:
-        src: /copy/environment
+        src: copy/environment
         dest: /etc/environment
     - name: " reloading evironment "
       command: source /etc/environment
     - name: " configuring core-site.xml "
       template:
-        src: /config_cluster/core-site.xml.j2
+        src: config_cluster/core-site.xml.j2
         dest: /opt/hadoop/etc/hadoop/core-site.xml
     - name: " configuring yarn-site.xml "
       template:
-        src: /config_cluster/yarn-site.xml.j2
+        src: config_cluster/yarn-site.xml.j2
         dest: /opt/hadoop/etc/hadoop/yarn-site.xml
     - name: " configuring mapred-site.xml "
       template:
-        src: /config_cluster/mapred-site.xml.j2
+        src: config_cluster/mapred-site.xml.j2
         dest: /opt/hadoop/etc/hadoop/mapred-site.xml
     
