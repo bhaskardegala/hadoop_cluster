@@ -33,8 +33,10 @@
       command: mv /opt/{{ package_hadoop }} /opt/hadoop
     - name: " adding evironment variables "
       copy:
-        src: /copy/.bashrc
-        dest: /.bashrc
+        src: /copy/environment
+        dest: /etc/environment
+    - name: " reloading evironment "
+      commond: source /etc/environment
     - name: " configuring core-site.xml "
       template:
         src: /config_cluster/core-site.xml.j2
