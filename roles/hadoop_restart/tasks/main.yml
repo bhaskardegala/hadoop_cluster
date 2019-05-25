@@ -6,8 +6,8 @@
       - ansible_os_family != "Debian"
     - name: " format hdfs "
       command:
-      argv:
-        - hdfs namenode -format
-        - /opt/hadoop/sbin/start-dfs.sh
-        - /opt/hadoop/sbin/start-yarn.sh
-        - /opt/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
+        argv:
+          - hdfs namenode -format
+          - sh /opt/hadoop/sbin/start-dfs.sh
+          - sh /opt/hadoop/sbin/start-yarn.sh
+          - sh /opt/hadoop/sbin/mr-jobhistory-daemon.sh start historyserver
