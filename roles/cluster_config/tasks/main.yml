@@ -39,7 +39,9 @@
         src: copy/environment
         dest: /etc/environment
     - name: " reloading evironment "
-      command: source /etc/environment
+      shell: source /etc/environment
+      args:
+        executable: /bin/bash
     - name: " configuring core-site.xml "
       template:
         src: config_cluster/core-site.xml.j2
