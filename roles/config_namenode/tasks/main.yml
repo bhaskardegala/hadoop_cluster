@@ -18,7 +18,7 @@
         state: directory
     - name: " creating masters file "
       template:
-        src: config_namenode/masters
+        src: config_namenode/masters.j2
         dest: /opt/hadoop/etc/hadoop/masters
     - name: " deleting slaves file "
       file :
